@@ -31,3 +31,13 @@ services:
       - ConnectionStrings__Default=Server=sqlserver;Database=Lms.Identity;User=sa;Password=Your_strong_password123;TrustServerCertificate=True
       - Jwt__Key=ypceUw1CQAK89gqJMp8ON1L6f/lVEZPzddCfGFQAAB7g9ElC8e+m9igVx9/npmYP/jmk+/+Z7ixwedcAuSsc0g==
     depends_on: [sqlserver]
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    environment:
+      - NEXT_PUBLIC_API_BASE=http://localhost:8080/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - gateway
